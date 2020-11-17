@@ -1,2 +1,2 @@
 # ProgRetiUnisa
-Progetto di Reti Geogrfiche incentrato sul Sentiment Analysis dei Tweets acquisiti tramite API
+Progetto di Reti Geografiche, incentrato sul Sentiment Analysis dei Tweets acquisiti tramite API
