@@ -1,0 +1,10 @@
+TASK
+
+- Modifica campo Retweet: da valore booleano a counter (numero dei retweets), ciò implica la creazione di una funzione apposita
+all'interno della cattura.
+
+- Contare tutti i tweet (compreso i retweet) ma stampo i tweet e conto i retweet di ognuno
+
+- Classificazione del SentimentAnalysis e salvataggio su MongoDB del sentiment
+
+- Vsualizzazione dei dati (Web Application)
