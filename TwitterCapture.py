@@ -2,8 +2,6 @@ import tweepy
 import pymongo
 import datetime,requests,os,re
 from pymongo import MongoClient
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from deep_translator import MyMemoryTranslator
 
 ### Formattazione Tweets
 def cleanTweet(string):
@@ -63,37 +61,30 @@ def cleanHashtags(string):
     string = emoji_pattern.sub(r'', string)
     return string
 
-### Tweet Translator
-def translatorTweet(tweet):
-    translated = MyMemoryTranslator(source="it", target="en").translate(tweet)
-    return translated
-
 
 ### Database Connection
 client= MongoClient("mongodb+srv://dbUser:dbUser@cluster0.lcwhz.mongodb.net/ProgReti?retryWrites=true&w=majority")
 db=client['ProgReti']
-collection=db['Week-one']
+collection=db['Tweet']
 
 #### Twitter Developer Credentials
-consumerKey = 'bBL43Fu0ZcXCxxnzOhCmqxPu9'
-consumerSecret = 'begHo3PEX199EuegKzqzmzcYjcV2hcvJxI0cYBdSLeEzPyR48Y'
-accessToken = '718840068-lGh9WG0qvvZ7Au3ar0lrFAczzN0SVkzmzFqoKNgJ'
-accessTokenSecret = 'FyCzGpaCkC0MpHycHxhpYyBs7hgIrUQMh3EMG7UNHV2KF'
+consumerKey = '577Wyn7YJ15g9QreB4FhtdeFv'
+consumerSecret = 'HEHaDmj4gpmEtZdcVpXeA4KYRcMDwMqpaHYLdrP6ui2o25NtA9'
+accessToken = '1327570641617362945-a3By7auPR9L6jmvFRoqfzJ9BLMILWE'
+accessTokenSecret = 'Ltl1db5rS52Yukcozmjlpiok4JVDTp4i411JMT1m4oPtQ'
+
 auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth,wait_on_rate_limit=True)
 
 data = {"documents": []}
-tweetSentiment = {"documents": []}
 
 # Inserimento Hashtag
 inputTerm = input("Enter Keyword/Tag to search about: ")
 searchTerm = inputTerm + " -filter:retweets"
-analyzer = SentimentIntensityAnalyzer()
-rt_count = 0
 
 print("Start Tweet Capturing..")
-for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11", until="2020-11-19", result_type="mixed", tweet_mode="extended").items():
+for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11", until="2020-11-19", result_type="mixed", tweet_mode="extended").items(200):
     rt_count = tweet.retweet_count
     print(tweet.created_at, tweet.full_text)
     p2 = ["", tweet.full_text]
@@ -117,8 +108,6 @@ for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11
     ddata=datetime.datetime.strptime(str(tweet.created_at),'%Y-%m-%d %H:%M:%S')
     tweet.full_text = cleanTweet(tweet.full_text)
     hast = cleanHashtags(hast)
-    #trans = translatorTweet(tweet.full_text)
-    #sentiment = analyzer.polarity_scores(trans)
     tt={
         "Id": tweet.id,
         'Hashtag': inputTerm,
@@ -128,6 +117,8 @@ for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11
         "Hashtags": hast,
         "Sentiment": 0
     }
-    data['documents'].append({"language": "it", "id": tweet.id, "text": tweet.full_text, "Retweet": rt_count})
-    #tweetSentiment['documents'].append(({"language": "it", "id": tweet.id, "text": trans, "score": sentiment}))
+    #data['documents'].append({"language": "it", "id": tweet.id, "text": tweet.full_text, "Retweet": rt_count})
     collection.insert_one(tt)
+
+
+
