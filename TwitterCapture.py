@@ -116,6 +116,7 @@ for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11
         "Testo":tweet.full_text,
         "Hashtags": hast,
         "Sentiment": 0
+        "Compound": 0
     }
     #data['documents'].append({"language": "it", "id": tweet.id, "text": tweet.full_text, "Retweet": rt_count})
     collection.insert_one(tt)
