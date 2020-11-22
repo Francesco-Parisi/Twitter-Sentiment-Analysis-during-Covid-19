@@ -41,6 +41,4 @@ for x in collection.find({ "Hashtag":hashtag,"Sentiment":0}):
     collection.update_one({"_id":x["_id"]},{"$set":{"Sentiment":sentimentAnalysis,"Compound":compound}})
     count += 1
 
-### prova
-print("prova")
 print("Total Tweets with {} Updated Success: {}".format(hashtag,count))
