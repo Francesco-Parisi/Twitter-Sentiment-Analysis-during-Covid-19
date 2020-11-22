@@ -84,7 +84,7 @@ inputTerm = input("Enter Keyword/Tag to search about: ")
 searchTerm = inputTerm + " -filter:retweets"
 
 print("Start Tweet Capturing..")
-for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11", until="2020-11-19", result_type="mixed", tweet_mode="extended").items(200):
+for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-17", until="2020-11-18", result_type="mixed", tweet_mode="extended").items(1000):
     rt_count = tweet.retweet_count
     print(tweet.created_at, tweet.full_text)
     p2 = ["", tweet.full_text]
@@ -115,7 +115,7 @@ for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-11
         "Data":str(ddata),
         "Testo":tweet.full_text,
         "Hashtags": hast,
-        "Sentiment": 0
+        "Sentiment": 0,
         "Compound": 0
     }
     #data['documents'].append({"language": "it", "id": tweet.id, "text": tweet.full_text, "Retweet": rt_count})

@@ -5,7 +5,7 @@ from textblob import TextBlob
 ### Database Connection
 client= MongoClient("mongodb+srv://dbUser:dbUser@cluster0.lcwhz.mongodb.net/ProgReti?retryWrites=true&w=majority")
 db=client['ProgReti']
-collection=db['Tweet']
+collection=db['Week-1']
 
 ### Tweet Translator
 def translatorTweet(tweet):
@@ -13,32 +13,32 @@ def translatorTweet(tweet):
     translate = blob.translate(from_lang='it',to='en')
     return translate
 
-#def Sentiment(compound):
-
+def Sentiment(compound):
+    if(compound <= -0.6001 and compound >= -1):
+        sentimentAnalysis = 1
+    if(compound <= -0.3001 and compound >= -0.6000):
+        sentimentAnalysis = 2
+    if(compound >= -0.3000 and compound <= 0.3000):
+        sentimentAnalysis = 3
+    if(compound >= 0.3001 and compound <= 0.6000):
+        sentimentAnalysis = 4
+    if(compound >= 0.6001 and compound <= 1):
+        sentimentAnalysis = 5
+    return sentimentAnalysis
 
 analyzer = SentimentIntensityAnalyzer()
 hashtag = input("Inserisci un Hashtag per fare Update: ")
 count = 0
 
-for x in collection.find({},{ "_id": 0}):
+for x in collection.find({ "Hashtag":hashtag,"Sentiment":0}):
     tweet = ("Testo:", x["Testo"])
-    if(x["Hashtag"] == hashtag):
-        translate = translatorTweet(tweet)
-        sentiment = analyzer.polarity_scores(str(translate))
-        compound = sentiment["compound"]
-        if(compound >= -0.6001 and compound <= -1):
-            sentimentAnalysis = "Negativo"
-        if(compound >= -0.3001 and compound <= -0.6000):
-            sentimentAnalysis = "Tendente Negativo"
-        if(compound >= -0.3000 and compound <= 0.3000):
-            sentimentAnalysis = "Neutro"
-        if(compound >= 0.3001 and compound <= 0.6000):
-            sentimentAnalysis = "Tendente Positivo"
-        if(compound >= 0.6001 and compound <= 1):
-            sentimentAnalysis = "Positivo"
-        query = {"Id":x["Id"],"Sentiment":sentimentAnalysis,"Compound": compound}
-        print(query)
-        collection.update_one({"Id":x["Id"]},{"$set":{"Sentiment":sentimentAnalysis,"Compound":compound}})
-        count += 1
+    translate = translatorTweet(tweet)
+    sentiment = analyzer.polarity_scores(str(translate))
+    compound = sentiment["compound"]
+    sentimentAnalysis = Sentiment(compound)
+    query = {"Id":x["Id"],"Sentiment":sentimentAnalysis,"Compound": compound}
+    print(query)
+    collection.update_one({"_id":x["_id"]},{"$set":{"Sentiment":sentimentAnalysis,"Compound":compound}})
+    count += 1
 
 print("Total Tweets with {} Updated Success: {}".format(hashtag,count))
