@@ -14,15 +14,15 @@ def translatorTweet(tweet):
     return translate
 
 def Sentiment(compound):
-    if(compound <= -0.6501 and compound >= -1):
+    if(compound <= -0.5501 and compound >= -1):
         sentimentAnalysis = 1
-    if(compound <= -0.2001 and compound >= -0.6500):
+    if(compound <= -0.2001 and compound >= -0.5500):
         sentimentAnalysis = 2
     if(compound >= -0.2000 and compound <= 0.2000):
         sentimentAnalysis = 3
-    if(compound >= 0.2001 and compound <= 0.6500):
+    if(compound >= 0.2001 and compound <= 0.5500):
         sentimentAnalysis = 4
-    if(compound >= 0.6501 and compound <= 1):
+    if(compound >= 0.5501 and compound <= 1):
         sentimentAnalysis = 5
     return sentimentAnalysis
 
