@@ -26,5 +26,6 @@ export default {
   width: 100%;
   display: grid;
   grid-template-rows: 100px calc(100vh - 100px);
+  background-color: beige;
 }
 </style>
