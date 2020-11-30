@@ -3,6 +3,7 @@ import Vuex  from 'vuex'  //import della libreria principale dello store
 
 //import dei file json dove sono salvati i dati 
 import Week1 from '../JSON/Week-1.json'
+import Week2 from '../JSON/Week-2.json'
 
 
 Vue.use(Vuex) // utilizzo di vuex 
@@ -16,6 +17,7 @@ const Hashtag=["#andratuttobene","#natale2020","#immuni","#iorestoacasa","#dpcm"
 export const store =  new Vuex.Store({ //creazione dello store
   state: {    //lo state rappresenta i dati
     Week1,
+    Week2,
     Hashtag
   },
   
@@ -33,7 +35,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==1){
        st= state.Week1}
       if(Week==2){
-         st= state.Week1}
+         st= state.Week2}
       if(Week==3){
          st= state.Week1}
       if(Week==4){
@@ -110,7 +112,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==1){
        st= state.Week1}
       if(Week==2){
-         st= state.Week1}
+         st= state.Week2}
       if(Week==3){
          st= state.Week1}
       if(Week==4){
@@ -160,7 +162,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==1){
        st= state.Week1}
       if(Week==2){
-         st= state.Week1}
+         st= state.Week2}
       if(Week==3){
          st= state.Week1}
       if(Week==4){
@@ -202,7 +204,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==1){
        st= state.Week1}
       if(Week==2){
-         st= state.Week1}
+         st= state.Week2}
       if(Week==3){
          st= state.Week1}
       if(Week==4){
