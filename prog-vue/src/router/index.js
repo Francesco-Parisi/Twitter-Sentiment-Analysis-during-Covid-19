@@ -20,7 +20,7 @@ const routes= [
     {
         path:'/week2',
         name:'Week2',
-        component:Week1
+        component:Week2
     }
 ]
 
