@@ -27,8 +27,8 @@
                 <div v-if="viewchart"  class="Chart">
                     <GChart
                         type="BarChart"
-                        :data="charData"
-                        :options="charOptions"/>
+                        :data="charDataBar"
+                        :options="charOptionsBar"/>
                 </div>
             </div>
 
@@ -47,19 +47,12 @@ export default {
     },
     data(){
         return{
+            
+            title:"",
             charData:[],
-            charOptions:{
-                title: 'Sentiment of the week',
-                is3D: true,
-                height:500,
-                annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                colors: ['#FF0000', '#FF4343', '#FFD000', '#00FF00', '#43AF43']
-
-
- 
-            },
+            charDataBar:[],
+            charOptions:{},
+            charOptionsBar:{},
             formData:vueData,
             hashtag:"",
             tweets:[],
@@ -70,24 +63,80 @@ export default {
     },
     methods: {
         general(){
-            console.log("avviato")
-            
-            this.charData=this.$store.getters.getSentimentWeek1;
+                this.charOptions={            
+                    title: "General Sentiment Of The Week",
+                    is3D: true,
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    colors: ['#FF0000', '#FF4343', '#FFD000', '#00FF00', '#43AF43']
+                }
+
+                 this.charOptionsBar={            
+                    title: "General Sentiment Of The Week",
+
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                }
+            let charts=this.$store.getters.getSentimentWeek(1);
+            this.charData=charts.PieChart;
+            this.charDataBar=charts.BarChart;
             this.viewchart=true
-        },
-        pulizza(){
-            this.charData=null
         },
         search(){
             if(this.has){
-                this.charData= this.$store.getters.getSentimentByHashtagWeek1("#"+this.hashtag)
+                this.charOptions={            
+                    title: "Sentiment Of The Week for "+ this.hashtag,
+                    is3D: true,
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    colors: ['#FF0000', '#FF4343', '#FFD000', '#00FF00', '#43AF43']
+                }
+
+                 this.charOptionsBar={            
+                    title: "Sentiment Of The Week for "+ this.hashtag,
+
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                }
+                let charts=this.$store.getters.getSentimentByHashtag("#"+this.hashtag,1)
+                console.log(charts)
+                this.charData= charts.PieChart;
+                this.charDataBar= charts.BarChart;
+
                 this.viewchart=true;
             }
             else{
-                console.log(this.formData.mydate)
-                this.charData= this.$store.getters.getSentimentByDataWeek1(this.formData.mydate)
+                this.charOptions={            
+                    title: "General Sentiment On "+this.formData.mydate,
+                    is3D: true,
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    colors: ['#FF0000', '#FF4343', '#FFD000', '#00FF00', '#43AF43']
+                }
+
+                 this.charOptionsBar={            
+                    title: "General Sentiment On "+this.formData.mydate,
+
+                    height:500,
+                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
+                }
+               let charts=this.$store.getters.getSentimentByData(this.formData.mydate,1)
+                 console.log(charts)
+                this.charData= charts.PieChart;
+                this.charDataBar= charts.BarChart
                 this.viewchart=true;
-                console.log(this.charData)
             }
         }
     },
@@ -119,7 +168,7 @@ export default {
     }
     .content{
     background-color: beige;
-
+    overflow: scroll;
         display: grid;
         grid-template-rows: 100px calc(100% - 100px);
         .search{
