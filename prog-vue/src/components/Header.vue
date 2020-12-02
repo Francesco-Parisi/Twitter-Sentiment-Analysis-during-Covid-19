@@ -1,9 +1,9 @@
 <template>
     <div class="header">
-        <div>Vue</div>
-        <div>Python</div>
-        <div>Twitter</div>
-        <div>Mongo</div>
+        <div><img src="../assets/vuejs.svg" width="500" height="100px"></div>
+        <div><img src="../assets/python.png" width="300" height="90px"></div>
+        <div><img src="../assets/twitter.png" width="300" height="80px"></div>
+        <div><img src="../assets/mongo.png" width="300" height="90px"></div>
     </div>
 </template>
 <script>
