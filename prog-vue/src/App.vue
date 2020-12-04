@@ -6,6 +6,17 @@
     <div class="view">
       <router-view/>
     </div>
+    <div class="footer">
+        <div class="selection">
+            <div class="link"><router-link to="/">Index</router-link> </div>
+            <div class="link"><router-link to="/All">ALL Weeks</router-link> </div>
+            <div class="link"><router-link to="/week1">Week1</router-link></div>
+            <div class="link"><router-link to="/week2">Week2</router-link></div>
+            <div class="link"><router-link to="/week3">Week3</router-link></div>
+            <div class="link"><router-link to="/week4">Week4</router-link></div>
+            <div class="link"><router-link to="/week5">Week5</router-link></div>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -25,7 +36,14 @@ export default {
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 100px calc(100vh - 100px);
+  grid-template-rows: 100px calc(100vh - 200px) 100px;
   background-color: beige;
+      .selection{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        align-content: center;
+        justify-items: center;
+    }
 }
 </style>

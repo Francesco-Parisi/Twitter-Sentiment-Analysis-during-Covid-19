@@ -22,12 +22,7 @@ export const store =  new Vuex.Store({ //creazione dello store
   },
   
   getters:{
-    getTopFiveRetweetWeek1: state=>{
-        return (state.Week1.sort((a,b)=>b.Retweet-a.Retweet)).slice(0,5)
-    },
-    getHashtag:state=>{
-      return state.Hashtag
-    },
+
     //FUNZIONE PER GENERARE L'ORDINE DEGLI HASHTAG + UTILIZZATI CHE PRENDE IN INPUT LA SETTIMANA
     getcategory:(state)=>Week=>{
       let st;
@@ -40,8 +35,6 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==4){
          st= state.Week1}
       if(Week==5){
-         st= state.Week1}
-      if(Week==6){
          st= state.Week1}
       let i=0;
       let numofHash=[];
@@ -250,8 +243,7 @@ return stweeks
          st= state.Week1}
       if(Week==5){
          st= state.Week1}
-      if(Week==6){
-         st= state.Week1}
+
       st= st.filter(tweet=> tweet.Data.match(date)!==null)
       let Negative= st.filter(a=> a.Sentiment===1)
       let TendNegative= st.filter(a=> a.Sentiment===2)
@@ -292,8 +284,7 @@ return stweeks
          st= state.Week1}
       if(Week==5){
          st= state.Week1}
-      if(Week==6){
-         st= state.Week1}
+
       st= st.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
       let Negative= st.filter(a=> a.Sentiment===1)
       let TendNegative= st.filter(a=> a.Sentiment===2)

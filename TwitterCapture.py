@@ -65,13 +65,13 @@ def cleanHashtags(string):
 ### Database Connection
 client= MongoClient("mongodb+srv://dbUser:dbUser@cluster0.lcwhz.mongodb.net/ProgReti?retryWrites=true&w=majority")
 db=client['ProgReti']
-collection=db['Tweet']
+collection=db['Week-3']
 
 #### Twitter Developer Credentials
-consumerKey = '577Wyn7YJ15g9QreB4FhtdeFv'
-consumerSecret = 'HEHaDmj4gpmEtZdcVpXeA4KYRcMDwMqpaHYLdrP6ui2o25NtA9'
-accessToken = '1327570641617362945-a3By7auPR9L6jmvFRoqfzJ9BLMILWE'
-accessTokenSecret = 'Ltl1db5rS52Yukcozmjlpiok4JVDTp4i411JMT1m4oPtQ'
+consumerKey = '4SUob4rkvJ3udNkdoWhgWB8w6'
+consumerSecret = 'gQHBuXo0Amw6fTlt1CwJp8xiIqnQxxgjyfTCQnBZz0nBUmqbBi'
+accessToken = '1331549356277817344-w4vmuKtf6W6qCcwvaNyqiqdvCjCILh'
+accessTokenSecret = 'kc3IqpTz3h0gzSny9MtdVuYVnQgoPXS2dZ0wZo48lYyRO'
 
 auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
@@ -84,7 +84,7 @@ inputTerm = input("Enter Keyword/Tag to search about: ")
 searchTerm = inputTerm + " -filter:retweets"
 
 print("Start Tweet Capturing..")
-for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-17", until="2020-11-18", result_type="mixed", tweet_mode="extended").items(1000):
+for tweet in tweepy.Cursor(api.search,q=searchTerm, lang="it", since="2020-11-27", until="2020-12-03", result_type="mixed", tweet_mode="extended").items(1000):
     rt_count = tweet.retweet_count
     print(tweet.created_at, tweet.full_text)
     p2 = ["", tweet.full_text]

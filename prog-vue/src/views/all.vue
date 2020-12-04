@@ -3,15 +3,10 @@
         <div class="sidebar">
             <div class="link" @click="has=false; dat=false; general()">General</div>
             <div class="link" @click="has=true; dat=false; viewchart=false">By Hashtag</div>
-            <div class="link" @click="dat=true; has=false; viewchart=false">By Data</div>
         </div>
         <div class="content">
-            <div class="search" >
-                <div class="data" v-if="dat">
-                    <input type="date" v-model="formData.mydate">
-                    <button class="btn-search" @click="search" v-if="has || dat"> search </button>
-                </div>
-                <div class="hashtag" v-if="has">
+            <div class="search" v-show="has">
+                <div class="hashtag">
                     <div><input type="radio" id="andratuttobene" value="#andratuttobene" v-model="hashtag">
                     <label for="andratuttobene">andratuttobene</label></div>
                     <div><input type="radio" id="natale2020" value="#natale2020" v-model="hashtag">
@@ -131,31 +126,6 @@ export default {
                 console.log(charts)
                 this.charDataBar= charts;
 
-                this.viewchart=true;
-            }
-            else{
-                this.charOptions={            
-                    title: "General Sentiment On "+this.formData.mydate,
-                    is3D: true,
-                    height:500,
-                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                    colors: ['#FF0000', '#FF4343', '#FFD000', '#00FF00', '#43AF43']
-                }
-
-                 this.charOptionsBar={            
-                    title: "General Sentiment On "+this.formData.mydate,
-
-                    height:500,
-                    annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                    legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                    domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
-                }
-               let charts=this.$store.getters.getSentimentByData(this.formData.mydate,1)
-                 console.log(charts)
-                this.charData= charts.PieChart;
-                this.charDataBar= charts.BarChart
                 this.viewchart=true;
             }
         }

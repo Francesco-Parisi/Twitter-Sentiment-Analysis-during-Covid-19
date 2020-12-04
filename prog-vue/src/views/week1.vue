@@ -1,20 +1,62 @@
 <template>
     <div class="main">
         <div class="sidebar">
-            <div class="link" @click="has=false; dat=false; viewchart=false">Top 5</div>
             <div class="link" @click="has=false; dat=false; general()">General</div>
             <div class="link" @click="has=true; dat=false; viewchart=false">By Hashtag</div>
             <div class="link" @click="dat=true; has=false; viewchart=false">By Data</div>
         </div>
         <div class="content">
-            <div class="search" >
+            <div class="search"  v-show="has || dat">
                 <div class="data" v-if="dat">
                     <input type="date" v-model="formData.mydate">
+                    <div class="btn"><button class="btn-search" @click="search" v-if="has || dat"> search </button></div>
+
                 </div>
                 <div class="hashtag" v-if="has">
-                    #<input type="text" v-model="hashtag">
+                    <div><input type="radio" id="andratuttobene" value="#andratuttobene" v-model="hashtag">
+                    <label for="andratuttobene">andratuttobene</label></div>
+                    <div><input type="radio" id="natale2020" value="#natale2020" v-model="hashtag">
+                    <label for="natale2020">natale2020</label></div>
+                    <div><input type="radio" id="immuni" value="#immuni" v-model="hashtag">
+                    <label for="immuni">immuni</label></div>
+                    <div><input type="radio" id="iorestoacasa" value="#iorestoacasa" v-model="hashtag">
+                    <label for="iorestoacasa">iorestoacasa</label></div>
+                    <div><input type="radio" id="dpcm" value="#dpcm" v-model="hashtag">
+                    <label for="dpcm">dpcm</label></div>
+                    <div><input type="radio" id="zonarossa" value="#zonarossa" v-model="hashtag">
+                    <label for="zonarossa">zonarossa</label></div>
+                    <div><input type="radio" id="zonaarancione" value="#zonaarancione" v-model="hashtag">
+                    <label for="zonaarancione">zonaarancione</label></div>
+                    <div><input type="radio" id="zonagialla" value="#zonagialla" v-model="hashtag">
+                    <label for="zonagialla">zonagialla</label></div>
+                    <div><input type="radio" id="giuseppeconte" value="#giuseppeconte" v-model="hashtag">
+                    <label for="giuseppeconte">giuseppeconte</label></div>
+                    <div><input type="radio" id="LItaliaSiRibella" value="#LItaliaSiRibella" v-model="hashtag">
+                    <label for="LItaliaSiRibella">LItaliaSiRibella</label></div>
+                    <div><input type="radio" id="nolockdown" value="#nolockdown" v-model="hashtag">
+                    <label for="nolockdown">nolockdown</label></div>
+                    <div><input type="radio" id="coronavirus" value="#coronavirus" v-model="hashtag">
+                    <label for="coronavirus">coronavirus</label></div>
+                    <div><input type="radio" id="lockdownitalia" value="#lockdownitalia" v-model="hashtag">
+                    <label for="lockdownitalia">lockdownitalia</label></div>
+                    <div><input type="radio" id="vaccinocovid" value="#vaccinocovid" v-model="hashtag">
+                    <label for="vaccinocovid">vaccinocovid</label></div>
+                    <div><input type="radio" id="congiuntifuoriregione" value="#congiuntifuoriregione" v-model="hashtag">
+                    <label for="congiuntifuoriregione">congiuntifuoriregione</label></div>
+                    
+                    <div><input type="radio" id="sanità" value="#sanità" v-model="hashtag">
+                    <label for="sanità">sanità</label></div>
+                    <div><input type="radio" id="secondaondata" value="#secondaondata" v-model="hashtag">
+                    <label for="secondaondata">secondaondata</label></div>
+                    <div><input type="radio" id="covidioti" value="#covidioti" v-model="hashtag">
+                    <label for="covidioti">covidioti</label></div>
+                    <div><input type="radio" id="dad" value="#dad" v-model="hashtag">
+                    <label for="dad">dad</label></div>
+                    <div><input type="radio" id="mascherine" value="#mascherine" v-model="hashtag">
+                    <label for="mascherine">mascherine</label></div>
+                    <div class="btn"><button class="btn-search" @click="search" v-if="has || dat"> search </button></div>
                 </div>
-                <button class="btn-search" @click="search" v-if="has || dat"> search </button>
+                
             </div>
 
             <div class="principal">
@@ -106,7 +148,7 @@ export default {
                     legend: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
                     domain: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
                 }
-                let charts=this.$store.getters.getSentimentByHashtag("#"+this.hashtag,1)
+                let charts=this.$store.getters.getSentimentByHashtag(this.hashtag,1)
                 console.log(charts)
                 this.charData= charts.PieChart;
                 this.charDataBar= charts.BarChart;
@@ -170,12 +212,22 @@ export default {
     background-color: beige;
     overflow: scroll;
         display: grid;
-        grid-template-rows: 100px calc(100% - 100px);
+        grid-template-rows: 200px calc(100% - 200px);
         .search{
             display:flex;
             height: 55px;
             padding-top:25px ;
             justify-content: center;
+            .hashtag{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                font-weight: bold;
+                .btn{
+                    grid-column-start: 2;
+                    grid-column-end: span 3;
+                }
+            }
         }
         .principal{
             height: 100%;
