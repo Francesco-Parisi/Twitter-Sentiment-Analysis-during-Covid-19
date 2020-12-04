@@ -1,6 +1,7 @@
 <template>
     <div class="main">
         <div class="sidebar">
+            <div class="link" @click="has=false; viewchart=false">Home</div>
             <div class="link" @click="has=false; dat=false; general()">General</div>
             <div class="link" @click="has=true; dat=false; viewchart=false">By Hashtag</div>
             <div class="link" @click="dat=true; has=false; viewchart=false">By Data</div>
