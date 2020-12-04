@@ -64,35 +64,35 @@ export const store =  new Vuex.Store({ //creazione dello store
       let tendpos=0;
       let pos=0;
       for(i=0;i<5;i++){
-        neg=neg+Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25
-        tendneg=tendneg+TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25
-        neu=neu+Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25
-        tendpos=tendpos+TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25
-        pos=pos+Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25
+        neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
+        tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
+        neu=neu+(Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
+        tendpos=tendpos+(TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
+        pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
 
       }
       for(i=5;i<10;i++){
-        neg=neg+Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5
-        tendneg=tendneg+TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5
-        neu=neu+Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5
-        tendpos=tendpos+TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5
-        pos=pos+Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5
+        neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
+        tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
+        neu=neu+(Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
+        tendpos=tendpos+(TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
+        pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
 
       }
       for(i=10;i<15;i++){
-        neg=neg+Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75
-        tendneg=tendneg+TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75
-        neu=neu+Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75
-        tendpos=tendpos+TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75
-        pos=pos+Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75
+        neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
+        tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
+        neu=neu+(Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
+        tendpos=tendpos+(TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
+        pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
 
       }
       for(i=15;i<20;i++){
-        neg=neg+Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) 
-        tendneg=tendneg+TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) 
-        neu=neu+Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) 
-        tendpos=tendpos+TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) 
-        pos=pos+Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) 
+        neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) )
+        tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0)) 
+        neu=neu+(Neutre.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) )
+        tendpos=tendpos+(TendPositive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0)) 
+        pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0)) 
 
       }
       return[Math.floor(neg),Math.floor(tendneg),Math.floor(neu),Math.floor(tendpos),Math.floor(pos)]
@@ -187,11 +187,12 @@ getSentimentAll: (state,getters)=>{
 return stweeks
   },
   getSentimentsByHashtag:(state,getters)=>hashtag=>{
-    let st1= state.Week1.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
-    let st2= state.Week2.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
-//    let st3= state.Week3.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
-//    let st4= state.Week4.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
-//    let st5= state.Week5.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
+    var re= new RegExp(hashtag,"i")
+    let st1= state.Week1.filter(tweet=> tweet.Hashtags.match(re)!==null)
+    let st2= state.Week2.filter(tweet=> tweet.Hashtags.match(re)!==null)
+//    let st3= state.Week3.filter(tweet=> tweet.Hashtags.match(re)!==null)
+//    let st4= state.Week4.filter(tweet=> tweet.Hashtags.match(re)!==null)
+//    let st5= state.Week5.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let retweet1=getters.getRetweetMultiplier(st1,1)
     let retweet2=getters.getRetweetMultiplier(st2,2)
 // let retweet3=getters.getRetweetMultiplier(st3,3)
@@ -284,8 +285,9 @@ return stweeks
          st= state.Week1}
       if(Week==5){
          st= state.Week1}
-
-      st= st.filter(tweet=> tweet.Hashtags.match(hashtag)!==null)
+      var re= new RegExp(hashtag,"i")
+      st= st.filter(tweet=> tweet.Hashtags.match(re)!==null)
+      console.log(st)
       let Negative= st.filter(a=> a.Sentiment===1)
       let TendNegative= st.filter(a=> a.Sentiment===2)
       let Neutre= st.filter(a=> a.Sentiment===3)
