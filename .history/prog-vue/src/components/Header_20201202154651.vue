@@ -21,12 +21,4 @@ export default {
     align-items: center;
     justify-items:center;
 }
-img{
-    user-drag: none; 
-    user-select: none;
-    -moz-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
 </style>
