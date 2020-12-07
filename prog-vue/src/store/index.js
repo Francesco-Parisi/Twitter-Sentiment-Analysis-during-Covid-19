@@ -4,6 +4,8 @@ import Vuex  from 'vuex'  //import della libreria principale dello store
 //import dei file json dove sono salvati i dati 
 import Week1 from '../JSON/Week-1.json'
 import Week2 from '../JSON/Week-2.json'
+import Week3 from '../JSON/Week-3.json'
+
 
 
 Vue.use(Vuex) // utilizzo di vuex 
@@ -18,6 +20,7 @@ export const store =  new Vuex.Store({ //creazione dello store
   state: {    //lo state rappresenta i dati
     Week1,
     Week2,
+    Week3,
     Hashtag
   },
   
@@ -31,7 +34,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==2){
          st= state.Week2}
       if(Week==3){
-         st= state.Week1}
+         st= state.Week3}
       if(Week==4){
          st= state.Week1}
       if(Week==5){
@@ -106,7 +109,7 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==2){
          st= state.Week2}
       if(Week==3){
-         st= state.Week1}
+         st= state.Week3}
       if(Week==4){
          st= state.Week1}
       if(Week==5){
@@ -150,7 +153,7 @@ export const store =  new Vuex.Store({ //creazione dello store
 getSentimentAll: (state,getters)=>{
   let retweet1=getters.getRetweetMultiplier(state.Week1,1)
   let retweet2=getters.getRetweetMultiplier(state.Week2,2)
- // let retweet3=getters.getRetweetMultiplier(state.Week2,1)
+  let retweet3=getters.getRetweetMultiplier(state.Week3,3)
  // let retweet4=getters.getRetweetMultiplier(state.Week2,1)
  // let retweet5=getters.getRetweetMultiplier(state.Week2,1)
 
@@ -168,11 +171,11 @@ getSentimentAll: (state,getters)=>{
       state.Week2.filter(a=>a.Sentiment===4).length+retweet2[3],
       state.Week2.filter(a=>a.Sentiment===5).length+retweet2[4],
       ''],
-  //    ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
-  //    state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
-  //    state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
-  //    state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
-  //    state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
+  ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
+      state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
+      state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
+      state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
+      state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
   //    ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0]
   //    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
   //    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
@@ -190,12 +193,12 @@ return stweeks
     var re= new RegExp(hashtag,"i")
     let st1= state.Week1.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let st2= state.Week2.filter(tweet=> tweet.Hashtags.match(re)!==null)
-//    let st3= state.Week3.filter(tweet=> tweet.Hashtags.match(re)!==null)
+    let st3= state.Week3.filter(tweet=> tweet.Hashtags.match(re)!==null)
 //    let st4= state.Week4.filter(tweet=> tweet.Hashtags.match(re)!==null)
 //    let st5= state.Week5.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let retweet1=getters.getRetweetMultiplier(st1,1)
     let retweet2=getters.getRetweetMultiplier(st2,2)
-// let retweet3=getters.getRetweetMultiplier(st3,3)
+ let retweet3=getters.getRetweetMultiplier(st3,3)
 // let retweet4=getters.getRetweetMultiplier(st4,4)
 // let retweet5=getters.getRetweetMultiplier(st5,5)
 let stweeks=[
@@ -212,11 +215,11 @@ let stweeks=[
   st2.filter(a=>a.Sentiment===4).length+retweet2[3],
   st2.filter(a=>a.Sentiment===5).length+retweet2[4],
   ''],
-//    ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
-//    state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
-//    state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
-//    state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
-//    state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
+    ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
+    state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
+    state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
+    state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
+    state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
 //    ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0]
 //    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
 //    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
@@ -239,7 +242,7 @@ return stweeks
       if(Week==2){
          st= state.Week2}
       if(Week==3){
-         st= state.Week1}
+         st= state.Week3}
       if(Week==4){
          st= state.Week1}
       if(Week==5){
@@ -280,7 +283,7 @@ return stweeks
       if(Week==2){
          st= state.Week2}
       if(Week==3){
-         st= state.Week1}
+         st= state.Week3}
       if(Week==4){
          st= state.Week1}
       if(Week==5){

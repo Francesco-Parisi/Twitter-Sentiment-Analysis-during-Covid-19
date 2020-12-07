@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import General from '../views/index.vue'
 import Week1 from '../views/week1.vue'
 import Week2 from '../views/week2.vue'
+import Week3 from '../views/week3.vue'
 import All from '../views/all.vue'
 
 Vue.use(VueRouter)
@@ -22,6 +23,11 @@ const routes= [
         path:'/week2',
         name:'Week2',
         component:Week2
+    },
+    {
+        path:'/week3',
+        name:'Week3',
+        component:Week3
     },
     {
         path:'/all',
