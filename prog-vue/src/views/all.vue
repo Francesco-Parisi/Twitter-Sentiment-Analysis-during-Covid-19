@@ -1,54 +1,55 @@
 <template>
     <div class="main">
         <div class="sidebar">
-            <div class="link" @click="has=false; viewchart=false">Home</div>
-            <div class="link" @click="has=false; dat=false; general()">General</div>
-            <div class="link" @click="has=true; dat=false; viewchart=false">By Hashtag</div>
+            <div class="link" @click="has=false; viewchart=false;isHome();hashtag=[]" >Home</div>
+            <div class="link" @click="has=false; dat=false;viewchartHome=false; general();hashtag=[]">General</div>
+            <div class="link" @click="has=true; dat=false; viewchart=false;viewchartHome=false;hashtag=[]">By Hashtag</div>
           
         </div>
         <div class="content">
             <div class="search" v-show="has">
+                <div class="error" v-show="hashtag==[]">Scelta non effettuata</div>
                 <div class="hashtag">
-                    <div><input type="radio" id="andratuttobene" value="#andratuttobene" v-model="hashtag">
+                    <div><input type="checkbox" id="andratuttobene" value="#andratuttobene" v-model="hashtag">
                     <label for="andratuttobene">andratuttobene</label></div>
-                    <div><input type="radio" id="natale2020" value="#natale2020" v-model="hashtag">
+                    <div><input type="checkbox" id="natale2020" value="#natale2020" v-model="hashtag">
                     <label for="natale2020">natale2020</label></div>
-                    <div><input type="radio" id="immuni" value="#immuni" v-model="hashtag">
+                    <div><input type="checkbox" id="immuni" value="#immuni" v-model="hashtag">
                     <label for="immuni">immuni</label></div>
-                    <div><input type="radio" id="iorestoacasa" value="#iorestoacasa" v-model="hashtag">
+                    <div><input type="checkbox" id="iorestoacasa" value="#iorestoacasa" v-model="hashtag">
                     <label for="iorestoacasa">iorestoacasa</label></div>
-                    <div><input type="radio" id="dpcm" value="#dpcm" v-model="hashtag">
+                    <div><input type="checkbox" id="dpcm" value="#dpcm" v-model="hashtag">
                     <label for="dpcm">dpcm</label></div>
-                    <div><input type="radio" id="zonarossa" value="#zonarossa" v-model="hashtag">
+                    <div><input type="checkbox" id="zonarossa" value="#zonarossa" v-model="hashtag">
                     <label for="zonarossa">zonarossa</label></div>
-                    <div><input type="radio" id="zonaarancione" value="#zonaarancione" v-model="hashtag">
+                    <div><input type="checkbox" id="zonaarancione" value="#zonaarancione" v-model="hashtag">
                     <label for="zonaarancione">zonaarancione</label></div>
-                    <div><input type="radio" id="zonagialla" value="#zonagialla" v-model="hashtag">
+                    <div><input type="checkbox" id="zonagialla" value="#zonagialla" v-model="hashtag">
                     <label for="zonagialla">zonagialla</label></div>
-                    <div><input type="radio" id="giuseppeconte" value="#giuseppeconte" v-model="hashtag">
+                    <div><input type="checkbox" id="giuseppeconte" value="#giuseppeconte" v-model="hashtag">
                     <label for="giuseppeconte">giuseppeconte</label></div>
-                    <div><input type="radio" id="LItaliaSiRibella" value="#LItaliaSiRibella" v-model="hashtag">
+                    <div><input type="checkbox" id="LItaliaSiRibella" value="#LItaliaSiRibella" v-model="hashtag">
                     <label for="LItaliaSiRibella">LItaliaSiRibella</label></div>
-                    <div><input type="radio" id="nolockdown" value="#nolockdown" v-model="hashtag">
+                    <div><input type="checkbox" id="nolockdown" value="#nolockdown" v-model="hashtag">
                     <label for="nolockdown">nolockdown</label></div>
-                    <div><input type="radio" id="coronavirus" value="#coronavirus" v-model="hashtag">
+                    <div><input type="checkbox" id="coronavirus" value="#coronavirus" v-model="hashtag">
                     <label for="coronavirus">coronavirus</label></div>
-                    <div><input type="radio" id="lockdownitalia" value="#lockdownitalia" v-model="hashtag">
+                    <div><input type="checkbox" id="lockdownitalia" value="#lockdownitalia" v-model="hashtag">
                     <label for="lockdownitalia">lockdownitalia</label></div>
-                    <div><input type="radio" id="vaccinocovid" value="#vaccinocovid" v-model="hashtag">
+                    <div><input type="checkbox" id="vaccinocovid" value="#vaccinocovid" v-model="hashtag">
                     <label for="vaccinocovid">vaccinocovid</label></div>
-                    <div><input type="radio" id="congiuntifuoriregione" value="#congiuntifuoriregione" v-model="hashtag">
+                    <div><input type="checkbox" id="congiuntifuoriregione" value="#congiuntifuoriregione" v-model="hashtag">
                     <label for="congiuntifuoriregione">congiuntifuoriregione</label></div>
                     
-                    <div><input type="radio" id="sanità" value="#sanità" v-model="hashtag">
+                    <div><input type="checkbox" id="sanità" value="#sanità" v-model="hashtag">
                     <label for="sanità">sanità</label></div>
-                    <div><input type="radio" id="secondaondata" value="#secondaondata" v-model="hashtag">
+                    <div><input type="checkbox" id="secondaondata" value="#secondaondata" v-model="hashtag">
                     <label for="secondaondata">secondaondata</label></div>
-                    <div><input type="radio" id="covidioti" value="#covidioti" v-model="hashtag">
+                    <div><input type="checkbox" id="covidioti" value="#covidioti" v-model="hashtag">
                     <label for="covidioti">covidioti</label></div>
-                    <div><input type="radio" id="dad" value="#dad" v-model="hashtag">
+                    <div><input type="checkbox" id="dad" value="#dad" v-model="hashtag">
                     <label for="dad">dad</label></div>
-                    <div><input type="radio" id="mascherine" value="#mascherine" v-model="hashtag">
+                    <div><input type="checkbox" id="mascherine" value="#mascherine" v-model="hashtag">
                     <label for="mascherine">mascherine</label></div>
                     <div class="btn"><button class="btn-search" @click="search" v-if="has || dat"> Search </button></div>
                 </div>
@@ -62,6 +63,13 @@
                         type="BarChart"
                         :data="charDataBar"
                         :options="charOptionsBar"/>
+                </div>
+                 <div v-if="viewchartGeneral"  class="Chart">
+                    <GChart
+                        type="ColumnChart"
+                        :data="charDataGeneral"
+                        :options="ColumnChartOptions"
+                        />
                 </div>
              </div>
 
@@ -83,18 +91,24 @@ export default {
             
             title:"",
             charData:[],
+            charDataGeneral:{},
             charDataBar:{},
             charOptions:{},
+            ColumnChartOptions:{},
             charOptionsBar:{},
             formData:vueData,
-            hashtag:"",
+            hashtag:[],
             tweets:[],
             has:false,
             dat:false,
-            viewchart:false
+            viewchart:false,
+            viewchartGeneral:false
         }
     },
     methods: {
+        isHome(){
+            console.log(this.$store.getters.getZoneChart)
+        },
         general(){
                 this.charOptionsBar={            
                     title: "General Sentiment Of The Weeks",
@@ -107,14 +121,26 @@ export default {
                     isStacked: 'percent'
 
                 }
+                this.ColumnChartOptions={
+                    title: "Density of Precious Metals, in g/cm^3",
+                    height: 600,
+                    bar: {groupWidth: "25%"},
+                    vAxis:{
+                        minValue:0,
+                        ticks:[1000,3000,5000,8000,10000,12000,14000,16000,18000,20000]
+
+                    }
+                }
             let charts=this.$store.getters.getSentimentAll;
-            this.charDataBar=charts;
+            this.charDataBar=charts[0];
+            this.charDataGeneral=charts[1];
             this.viewchart=true
+            this.viewchartGeneral=true
         },
         search(){
             if(this.has){
                 this.charOptionsBar={            
-                    title: "General Sentiment Of The Weeks",
+                    title: "General Sentiment Of "+this.hashtag,
                     height:500,
                     fontSize:20,
                     annotationText: {textStyle:  {fontName: 'Calibri',fontSize: 20,bold: true}},
@@ -124,12 +150,17 @@ export default {
                     
                     isStacked: 'percent'
                 }
-
-                let charts=this.$store.getters.getSentimentsByHashtag(this.hashtag)
-                console.log(charts)
+                console.log(this.hashtag.length)
+                if(this.hashtag.length===0){
+                    this.viewchart=false
+                }
+                else{
+                let charts=this.$store.getters.getCompareChart(this.hashtag)
+                this.hashtag=[];
                 this.charDataBar= charts;
 
                 this.viewchart=true;
+                }
             }
         }
     },
