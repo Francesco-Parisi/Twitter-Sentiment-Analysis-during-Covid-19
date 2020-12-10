@@ -122,7 +122,7 @@ export default {
 
                 }
                 this.ColumnChartOptions={
-                    title: "Total Number of The Tweets for every Week Captured",
+                    title: "Total Number of The Tweet of All Week Captured",
                     height: 600,
                     bar: {groupWidth: "25%"},
                     vAxis:{
