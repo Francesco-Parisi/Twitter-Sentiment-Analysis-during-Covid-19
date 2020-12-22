@@ -5,6 +5,8 @@ import Vuex  from 'vuex'  //import della libreria principale dello store
 import Week1 from '../JSON/Week-1.json'
 import Week2 from '../JSON/Week-2.json'
 import Week3 from '../JSON/Week-3.json'
+import Week4 from '../JSON/Week-4.json'
+import Week5 from '../JSON/Week-5.json'
 
 
 
@@ -21,6 +23,8 @@ export const store =  new Vuex.Store({ //creazione dello store
     Week1,
     Week2,
     Week3,
+    Week4,
+    Week5,
     Hashtag
   },
   
@@ -36,9 +40,9 @@ export const store =  new Vuex.Store({ //creazione dello store
       if(Week==3){
          st= state.Week3}
       if(Week==4){
-         st= state.Week1}
+         st= state.Week4}
       if(Week==5){
-         st= state.Week1}
+         st= state.Week5}
       let i=0;
       let numofHash=[];
       let multiplier=[];
@@ -51,9 +55,12 @@ export const store =  new Vuex.Store({ //creazione dello store
       }
       return multiplier
     },
+
+//   FUNZIONE CHE PRENDE IN INPUT LA SETTIMANA E LA RACCOLTA DEI TWEETS,
+//   E PRODUCE IL NUMERO DEI RETWEET
     getRetweetMultiplier:(state,getters)=>(tweets,week)=>{
       let st= tweets
-      let multiplier=getters.getcategory(week);
+      let multiplier=getters.getcategory(week); //CHIAMATA ALLA FUNZIONE PER LA POPOLARITA'
       let Negative= st.filter(a=> a.Sentiment===1)
       let TendNegative= st.filter(a=> a.Sentiment===2)
       let Neutre= st.filter(a=> a.Sentiment===3)
@@ -66,6 +73,8 @@ export const store =  new Vuex.Store({ //creazione dello store
       let neu=0;
       let tendpos=0;
       let pos=0;
+
+      //HASHTAG PIU' POPOLARI, DI CONSEGUENZA FATTORE MOLTIPLICATIVO=0,25 
       for(i=0;i<5;i++){
         neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
         tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
@@ -74,6 +83,8 @@ export const store =  new Vuex.Store({ //creazione dello store
         pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.25)
 
       }
+      //FATTORE MOLTIPLICATIVO=0,5 
+
       for(i=5;i<10;i++){
         neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
         tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
@@ -82,6 +93,9 @@ export const store =  new Vuex.Store({ //creazione dello store
         pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.5)
 
       }
+
+      //FATTORE MOLTIPLICATIVO=0,75 
+
       for(i=10;i<15;i++){
         neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
         tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
@@ -90,6 +104,10 @@ export const store =  new Vuex.Store({ //creazione dello store
         pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) *0.75)
 
       }
+
+
+      //FATTORE MOLTIPLICATIVO=1 
+
       for(i=15;i<20;i++){
         neg=neg+(Negative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0) )
         tendneg=tendneg+(TendNegative.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0)) 
@@ -98,58 +116,84 @@ export const store =  new Vuex.Store({ //creazione dello store
         pos=pos+(Positive.filter(a=> a.Hashtag===multiplier[i]).map(a=> a.Retweet).reduce((a,b)=>a+b,0)) 
 
       }
+
       return[Math.floor(neg),Math.floor(tendneg),Math.floor(neu),Math.floor(tendpos),Math.floor(pos)]
       
     },
 
-    getSentimentWeek: (state,getters) =>Week=>{
-      let st;
-      if(Week==1){
-       st= state.Week1}
-      if(Week==2){
-         st= state.Week2}
-      if(Week==3){
-         st= state.Week3}
-      if(Week==4){
-         st= state.Week1}
-      if(Week==5){
-         st= state.Week1}
-                        
-      let Negative= st.filter(a=> a.Sentiment===1)
-      let TendNegative= st.filter(a=> a.Sentiment===2)
-      let Neutre= st.filter(a=> a.Sentiment===3)
-      let TendPositive= st.filter(a=> a.Sentiment===4)
-      let Positive= st.filter(a=> a.Sentiment===5)
-      let retweet=getters.getRetweetMultiplier(st,Week)
-      
-   //   let numofRetweetTendNegative= TendNegative.map(a=> a.Retweet).reduce((a,b)=>a+b,0)
-      
-     // let numofRetweetNeutre= Neutre.map(a=> a.Retweet).reduce((a,b)=>a+b,0)
-      
-    //  let numofRetweetTendPositive= TendPositive.map(a=> a.Retweet).reduce((a,b)=>a+b,0)
-      
-    //  let numofRetweetPositive= Positive.map(a=> a.Retweet).reduce((a,b)=>a+b,0)
-    
-      return {'PieChart':[
-        ["Sentimento","Tweet"],
-        ["Negativo",Negative.length+retweet[0]],
-        ["Tendente Negativo",TendNegative.length+retweet[1]],
-        ["Neutro",Neutre.length+retweet[2]],
-        ["Tendente Positivo",TendPositive.length+retweet[3]],
-        ["Positivo",Positive.length+retweet[4]]
-        
-      ],
-      'BarChart':[
-        ["Sentimento","DATI",{ role: 'style' }],
-        ["Negativo",Negative.length+retweet[0],'#FF0000'],
-        ["Tendente Negativo",TendNegative.length+retweet[1],'#FF4343'],
-        ["Neutro",Neutre.length+retweet[2],'#FFD000'],
-        ["Tendente Positivo",TendPositive.length+retweet[3],'#00FF00'],
-        ["Positivo",Positive.length+retweet[4],'#43AF43']
-        
-      ] 
-    }
+    getCompareChart:(state,getters)=>(hashtags)=>{
+      let i=0;
+      console.log(hashtags)
+      let re=[]
+      for(i=0;i<hashtags.length;i++){
+        re[i]= new RegExp(hashtags[i],"i")  
+      }
+      let st1=state.Week1.filter(tweet=>{
+        for (var i=0; i<re.length; i++)
+        if(tweet.Hashtags.match(re[i])) return true;
+    return false;
+                                                })
+      let st2=state.Week2.filter(tweet=>{
+        for (var i=0; i<re.length; i++)
+        if(tweet.Hashtags.match(re[i])) return true;
+    return false;
+        })
+
+        let st3=state.Week3.filter(tweet=>{
+          for (var i=0; i<re.length; i++)
+          if(tweet.Hashtags.match(re[i])) return true;
+        return false;
+        })
+        let st4=state.Week4.filter(tweet=>{
+          for (var i=0; i<re.length; i++)
+          if(tweet.Hashtags.match(re[i])) return true;
+        return false;
+        })
+        let st5=state.Week5.filter(tweet=>{
+          for (var i=0; i<re.length; i++)
+          if(tweet.Hashtags.match(re[i])) return true;
+        return false;
+        })
+
+      let retweet1=getters.getRetweetMultiplier(st1,1)
+      let retweet2=getters.getRetweetMultiplier(st2,2)
+      let retweet3=getters.getRetweetMultiplier(st3,3)
+      let retweet4=getters.getRetweetMultiplier(st4,4)
+      let retweet5=getters.getRetweetMultiplier(st5,5)
+     
+      let stweeks=[
+        ["settimana","NEGATIVI","TEND.NEGATIVI","NEUTRI","TEND.POSITIVI","POSITIVI",{role:'annotation'}],
+        ["WEEK1",st1.filter(a=>a.Sentiment===1).length+retweet1[0],
+        st1.filter(a=>a.Sentiment===2).length+retweet1[1],
+        st1.filter(a=>a.Sentiment===3).length+retweet1[2],
+        st1.filter(a=>a.Sentiment===4).length+retweet1[3],
+        st1.filter(a=>a.Sentiment===5).length+retweet1[4],
+        ''],
+        ["WEEK2",st2.filter(a=>a.Sentiment===1).length+retweet2[0],
+        st2.filter(a=>a.Sentiment===2).length+retweet2[1],
+        st2.filter(a=>a.Sentiment===3).length+retweet2[2],
+        st2.filter(a=>a.Sentiment===4).length+retweet2[3],
+        st2.filter(a=>a.Sentiment===5).length+retweet2[4],
+        ''],
+          ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
+          state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
+          state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
+          state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
+          state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
+          ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0],
+          state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
+          state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
+          state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
+          state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
+          ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
+          state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
+          state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
+          state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
+          state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
+      ]
+      return stweeks
     },
+ 
 getSentimentAll: (state,getters)=>{
   let retweet1=getters.getRetweetMultiplier(state.Week1,1)
   let sumret1=retweet1.reduce((a,b)=> a+b,0);
@@ -157,10 +201,10 @@ getSentimentAll: (state,getters)=>{
   let sumret2=retweet2.reduce((a,b)=> a+b,0);
   let retweet3=getters.getRetweetMultiplier(state.Week3,3)
   let sumret3=retweet3.reduce((a,b)=> a+b,0);
-  // let retweet4=getters.getRetweetMultiplier(state.Week2,1)
-//  let sumret4=retweet4.reduce((a,b)=> a+b,0);
-  // let retweet5=getters.getRetweetMultiplier(state.Week2,1)
-//  let sumret5=retweet5.reduce((a,b)=> a+b,0);
+  let retweet4=getters.getRetweetMultiplier(state.Week4,4)
+  let sumret4=retweet4.reduce((a,b)=> a+b,0);
+  let retweet5=getters.getRetweetMultiplier(state.Week5,5)
+  let sumret5=retweet5.reduce((a,b)=> a+b,0);
 
 
     let stweeks=[
@@ -182,25 +226,25 @@ getSentimentAll: (state,getters)=>{
       state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
       state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
       state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
-  //    ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0]
-  //    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
-  //    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
-  //    state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
-  //    state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
-  //    ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
-  //    state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
-  //    state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
-  //    state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
-  //    state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
+      ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0],
+      state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
+      state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
+      state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
+      state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
+      ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
+      state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
+      state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
+      state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
+      state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
     ]
 
     let weeks=[
       ["WEEKS","TWEETS",{role:'annotation'}],
       ["Week1",state.Week1.length+sumret1,state.Week1.length+sumret1],
       ["Week2",state.Week2.length+sumret2,state.Week2.length+sumret2],
-      ["Week3",state.Week3.length+sumret3,state.Week3.length+sumret3]
-//      ["Week4",state.Week4.length+sumret4],
-//      ["Week5",state.Week5.length+sumret5]
+      ["Week3",state.Week3.length+sumret3,state.Week3.length+sumret3],
+      ["Week4",state.Week4.length+sumret4,state.Week4.length+sumret4],
+      ["Week5",state.Week5.length+sumret5,state.Week5.length+sumret5]
 
     ]
 return [stweeks,weeks]
@@ -210,13 +254,13 @@ return [stweeks,weeks]
     let st1= state.Week1.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let st2= state.Week2.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let st3= state.Week3.filter(tweet=> tweet.Hashtags.match(re)!==null)
-//    let st4= state.Week4.filter(tweet=> tweet.Hashtags.match(re)!==null)
-//    let st5= state.Week5.filter(tweet=> tweet.Hashtags.match(re)!==null)
+    let st4= state.Week4.filter(tweet=> tweet.Hashtags.match(re)!==null)
+    let st5= state.Week5.filter(tweet=> tweet.Hashtags.match(re)!==null)
     let retweet1=getters.getRetweetMultiplier(st1,1)
     let retweet2=getters.getRetweetMultiplier(st2,2)
- let retweet3=getters.getRetweetMultiplier(st3,3)
-// let retweet4=getters.getRetweetMultiplier(st4,4)
-// let retweet5=getters.getRetweetMultiplier(st5,5)
+    let retweet3=getters.getRetweetMultiplier(st3,3)
+    let retweet4=getters.getRetweetMultiplier(st4,4)
+    let retweet5=getters.getRetweetMultiplier(st5,5)
 let stweeks=[
   ["settimana","NEGATIVI","TEND.NEGATIVI","NEUTRI","TEND.POSITIVI","POSITIVI",{role:'annotation'}],
   ["WEEK1",st1.filter(a=>a.Sentiment===1).length+retweet1[0],
@@ -236,19 +280,60 @@ let stweeks=[
     state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
     state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
     state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
-//    ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0]
-//    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
-//    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
-//    state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
-//    state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
-//    ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
-//    state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
-//    state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
-//    state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
-//    state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
+   ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0],
+    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
+    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
+    state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
+    state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
+    ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
+    state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
+    state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
+    state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
+    state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
 ]
 return stweeks
 
+  },
+  getSentimentWeek: (state,getters) =>Week=>{
+    let st;
+    if(Week==1){
+     st= state.Week1}
+    if(Week==2){
+       st= state.Week2}
+    if(Week==3){
+       st= state.Week3}
+    if(Week==4){
+       st= state.Week4}
+    if(Week==5){
+       st= state.Week5}
+                      
+    let Negative= st.filter(a=> a.Sentiment===1)
+    let TendNegative= st.filter(a=> a.Sentiment===2)
+    let Neutre= st.filter(a=> a.Sentiment===3)
+    let TendPositive= st.filter(a=> a.Sentiment===4)
+    let Positive= st.filter(a=> a.Sentiment===5)
+    let retweet=getters.getRetweetMultiplier(st,Week)
+    
+  
+    return {'PieChart':[
+      ["Sentimento","Tweet"],
+      ["Negativo",Negative.length+retweet[0]],
+      ["Tendente Negativo",TendNegative.length+retweet[1]],
+      ["Neutro",Neutre.length+retweet[2]],
+      ["Tendente Positivo",TendPositive.length+retweet[3]],
+      ["Positivo",Positive.length+retweet[4]]
+      
+    ],
+    'BarChart':[
+      ["Sentimento","DATI",{ role: 'style' }],
+      ["Negativo",Negative.length+retweet[0],'#FF0000'],
+      ["Tendente Negativo",TendNegative.length+retweet[1],'#FF4343'],
+      ["Neutro",Neutre.length+retweet[2],'#FFD000'],
+      ["Tendente Positivo",TendPositive.length+retweet[3],'#00FF00'],
+      ["Positivo",Positive.length+retweet[4],'#43AF43']
+      
+    ] 
+  }
   },
 
     getSentimentByData: (state,getters) =>(date,Week)=>{
@@ -260,9 +345,9 @@ return stweeks
       if(Week==3){
          st= state.Week3}
       if(Week==4){
-         st= state.Week1}
+         st= state.Week4}
       if(Week==5){
-         st= state.Week1}
+         st= state.Week5}
 
       st= st.filter(tweet=> tweet.Data.match(date)!==null)
       let Negative= st.filter(a=> a.Sentiment===1)
@@ -301,9 +386,9 @@ return stweeks
       if(Week==3){
          st= state.Week3}
       if(Week==4){
-         st= state.Week1}
+         st= state.Week4}
       if(Week==5){
-         st= state.Week1}
+         st= state.Week5}
       var re= new RegExp(hashtag,"i")
       st= st.filter(tweet=> tweet.Hashtags.match(re)!==null)
       console.log(st)
@@ -332,86 +417,8 @@ return stweeks
         
       ] 
     }
-    },
-    getCompareChart:(state,getters)=>(hashtags)=>{
-      let i=0;
-      console.log(hashtags)
-      let re=[]
-      for(i=0;i<hashtags.length;i++){
-        re[i]= new RegExp(hashtags[i],"i")  
-      }
-      console.log(re)
-      let st1=state.Week1.filter(tweet=>{
-        for (var i=0; i<re.length; i++)
-        if(tweet.Hashtags.match(re[i])) return true;
-    return false;
-                                                })
-      
-
-      console.log(st1)
-      let st2=state.Week2.filter(tweet=>{
-        for (var i=0; i<re.length; i++)
-        if(tweet.Hashtags.match(re[i])) return true;
-    return false;
-        })
-
-let st3=state.Week3.filter(tweet=>{
-  for (var i=0; i<re.length; i++)
-  if(tweet.Hashtags.match(re[i])) return true;
-return false;
-})
- 
-
-//        let st4=state.Week4.filter(function(e){
-//          return re.some(function(reg){
-//            return reg.test(e)
-//          })
-//          })
-          
-//          let st5=state.Week5.filter(function(e){
-//            return re.some(function(reg){
-//              return reg.test(e)
-//            })
-//            })
-
-      let retweet1=getters.getRetweetMultiplier(st1,1)
-      let retweet2=getters.getRetweetMultiplier(st2,2)
-      let retweet3=getters.getRetweetMultiplier(st3,3)
-//      let retweet4=getters.getRetweetMultiplier(st4,4)
-//      let retweet5=getters.getRetweetMultiplier(st5,5)
-     
-      let stweeks=[
-        ["settimana","NEGATIVI","TEND.NEGATIVI","NEUTRI","TEND.POSITIVI","POSITIVI",{role:'annotation'}],
-        ["WEEK1",st1.filter(a=>a.Sentiment===1).length+retweet1[0],
-        st1.filter(a=>a.Sentiment===2).length+retweet1[1],
-        st1.filter(a=>a.Sentiment===3).length+retweet1[2],
-        st1.filter(a=>a.Sentiment===4).length+retweet1[3],
-        st1.filter(a=>a.Sentiment===5).length+retweet1[4],
-        ''],
-        ["WEEK2",st2.filter(a=>a.Sentiment===1).length+retweet2[0],
-        st2.filter(a=>a.Sentiment===2).length+retweet2[1],
-        st2.filter(a=>a.Sentiment===3).length+retweet2[2],
-        st2.filter(a=>a.Sentiment===4).length+retweet2[3],
-        st2.filter(a=>a.Sentiment===5).length+retweet2[4],
-        ''],
-          ["WEEK3",state.Week3.filter(a=>a.Sentiment===1).length+retweet3[0],
-          state.Week3.filter(a=>a.Sentiment===2).length+retweet3[1],
-          state.Week3.filter(a=>a.Sentiment===3).length+retweet3[2],
-          state.Week3.filter(a=>a.Sentiment===4).length+retweet3[3],
-          state.Week3.filter(a=>a.Sentiment===5).length+retweet3[4],''],
-      //    ["WEEK4",state.Week4.filter(a=>a.Sentiment===1).length+retweet4[0]
-      //    state.Week4.filter(a=>a.Sentiment===2).length+retweet4[1],
-      //    state.Week4.filter(a=>a.Sentiment===3).length+retweet4[2],
-      //    state.Week4.filter(a=>a.Sentiment===4).length+retweet4[3],
-      //    state.Week4.filter(a=>a.Sentiment===5).length+retweet4[4],''],
-      //    ["WEEK5",state.Week5.filter(a=>a.Sentiment===1).length+retweet5[0],
-      //    state.Week5.filter(a=>a.Sentiment===2).length+retweet5[1],
-      //    state.Week5.filter(a=>a.Sentiment===3).length+retweet5[2],
-      //    state.Week5.filter(a=>a.Sentiment===4).length+retweet5[3],
-      //    state.Week5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
-      ]
-      return stweeks
     }
+
     
   }
 
