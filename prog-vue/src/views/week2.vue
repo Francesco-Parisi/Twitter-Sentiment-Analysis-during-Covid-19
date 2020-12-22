@@ -9,7 +9,7 @@
         <div class="content">
             <div class="search"  v-show="has || dat">
                 <div class="data" v-if="dat">
-                    <input type="date" v-model="formData.mydate" min="2020-11-18" max="2020-11-20">
+                    <input type="date" v-model="formData.mydate" min="2020-11-19" max="2020-11-25">
                     <div class="btn"><button class="btn-search" @click="search" v-if="has || dat"> search </button></div>
 
                 </div>
