@@ -63,6 +63,11 @@
                         type="BarChart"
                         :data="charDataBar"
                         :options="charOptionsBar"/>
+                    <GChart
+                        type="BarChart"
+                        :data="charDataBar2"
+                        :options="charOptionsBar"/>
+                    
                 </div>
                  <div v-if="viewchartGeneral"  class="Chart">
                     <GChart
@@ -93,6 +98,7 @@ export default {
             charData:[],
             charDataGeneral:{},
             charDataBar:{},
+            charDataBar2:{},
             charOptions:{},
             ColumnChartOptions:{},
             charOptionsBar:{},
@@ -157,7 +163,8 @@ export default {
                 else{
                 let charts=this.$store.getters.getCompareChart(this.hashtag)
                 this.hashtag=[];
-                this.charDataBar= charts;
+                this.charDataBar= charts[0];
+                this.charDataBar2= charts[1];
 
                 this.viewchart=true;
                 }

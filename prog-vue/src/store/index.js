@@ -191,8 +191,17 @@ export const store =  new Vuex.Store({ //creazione dello store
           st5.filter(a=>a.Sentiment===4).length+retweet5[3],
           st5.filter(a=>a.Sentiment===5).length+retweet5[4],''],
       ];
+      let totneg=         (st1.filter(a=>a.Sentiment===1).length+retweet1[0])+(st2.filter(a=>a.Sentiment===1).length+retweet2[0])+(st3.filter(a=>a.Sentiment===1).length+retweet3[0])+(st4.filter(a=>a.Sentiment===1).length+retweet4[0])+(st5.filter(a=>a.Sentiment===1).length+retweet5[0]);
+      let tottendneg=     (st1.filter(a=>a.Sentiment===2).length+retweet1[1])+(st2.filter(a=>a.Sentiment===2).length+retweet2[1])+(st3.filter(a=>a.Sentiment===2).length+retweet3[1])+(st4.filter(a=>a.Sentiment===2).length+retweet4[1])+(st5.filter(a=>a.Sentiment===2).length+retweet5[1]);
+      let totneu=         (st1.filter(a=>a.Sentiment===3).length+retweet1[2])+(st2.filter(a=>a.Sentiment===3).length+retweet2[2])+(st3.filter(a=>a.Sentiment===3).length+retweet3[2])+(st4.filter(a=>a.Sentiment===3).length+retweet4[2])+(st5.filter(a=>a.Sentiment===3).length+retweet5[2]);
+      let tottendpos=     (st1.filter(a=>a.Sentiment===4).length+retweet1[3])+(st2.filter(a=>a.Sentiment===4).length+retweet2[3])+(st3.filter(a=>a.Sentiment===4).length+retweet3[3])+(st4.filter(a=>a.Sentiment===4).length+retweet4[3])+(st5.filter(a=>a.Sentiment===4).length+retweet5[3]);
+      let totpos=         (st1.filter(a=>a.Sentiment===5).length+retweet1[4])+(st2.filter(a=>a.Sentiment===5).length+retweet2[4])+(st3.filter(a=>a.Sentiment===5).length+retweet3[4])+(st4.filter(a=>a.Sentiment===5).length+retweet4[4])+(st5.filter(a=>a.Sentiment===5).length+retweet5[4]);
 
-      return stweeks
+      let stweek=[
+        ["settimana","NEGATIVI","TEND.NEGATIVI","NEUTRI","TEND.POSITIVI","POSITIVI",{role:'annotation'}],
+        ["WEEKS",totneg,tottendneg,totneu,tottendpos,totpos,""]
+      ]
+      return [stweeks,stweek]
     },
  
 getSentimentAll: (state,getters)=>{
