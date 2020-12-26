@@ -8,13 +8,13 @@
     </div>
     <div class="footer">
         <div class="selection">
-            <button class="hvr-outline-in"><router-link to="/" class="item">Home</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/All" class="item">ALL Weeks</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/week1" class="item">Week1</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/week2" class="item">Week2</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/week3" class="item">Week3</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/week4" class="item">Week4</router-link></button>
-            <button class="hvr-outline-in"><router-link to="/week5" class="item">Week5</router-link></button>
+            <button class="hvr-outline-in" @click="$router.push('/')">Home</button>
+            <button class="hvr-outline-in" @click="$router.push('/All')">ALL Weeks</button>
+            <button class="hvr-outline-in" @click="$router.push('/week1')">Week1</button>
+            <button class="hvr-outline-in" @click="$router.push('/week2')">Week2</button>
+            <button class="hvr-outline-in" @click="$router.push('/week3')">Week3</button>
+            <button class="hvr-outline-in" @click="$router.push('/week4')">Week4</button>
+            <button class="hvr-outline-in" @click="$router.push('/week5')">Week5</button>
         </div>
     </div>
   </div>
