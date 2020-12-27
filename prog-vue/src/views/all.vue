@@ -1,9 +1,8 @@
 <template>
     <div class="main">
         <div class="sidebar">
-            <div class="link" @click="has=false; viewchart=false;isHome();hashtag=[]" >Home</div>
-            <div class="link" @click="has=false; dat=false;viewchartHome=false; general();hashtag=[]">General</div>
-            <div class="link" @click="has=true; dat=false; viewchart=false;viewchartHome=false;hashtag=[]">By Hashtag</div>
+            <div class="link" @click="has=false; dat=false;viewchartHome=false;viewcharthash=false; general();hashtag=[]">General</div>
+            <div class="link" @click="has=true; dat=false; viewchart=false;viewchartGeneral=false;hashtag=[]">By Hashtag</div>
           
         </div>
         <div class="content">
@@ -63,6 +62,8 @@
                         type="BarChart"
                         :data="charDataBar"
                         :options="charOptionsBar"/>
+                </div>
+                <div v-if="viewcharthash"  class="Chart">
                     <GChart
                         type="BarChart"
                         :data="charDataBar2"
@@ -93,7 +94,7 @@ export default {
     },
     data(){
         return{
-            
+            viewcharthash:false,
             title:"",
             charData:[],
             charDataGeneral:{},
@@ -165,11 +166,14 @@ export default {
                 this.hashtag=[];
                 this.charDataBar= charts[0];
                 this.charDataBar2= charts[1];
-
+                this.viewcharthash=true
                 this.viewchart=true;
                 }
             }
         }
+    },
+    mounted() {
+        this.general();
     },
     
 }
@@ -183,8 +187,8 @@ export default {
     height: 100%;
     .sidebar{
         display:grid;
-        grid-template-rows: repeat(4,50px);
-        height:150px;
+        grid-template-rows: repeat(2,50px);
+        height:100px;
         padding-left:0px;
         color:white;
         text-shadow: 1px 1px black;

@@ -1,7 +1,6 @@
 <template>
     <div class="main">
         <div class="sidebar">
-            <div class="link" @click="has=false; viewchart=false">Home</div>
             <div class="link" @click="has=false; dat=false; general()">General</div>
             <div class="link" @click="has=true; dat=false; viewchart=false">By Hashtag</div>
             <div class="link" @click="dat=true; has=false; viewchart=false">By Data</div>
@@ -195,8 +194,8 @@ export default {
     height: 100%;
     .sidebar{
         display:grid;
-        grid-template-rows: repeat(4,50px);
-        height:200px;
+        grid-template-rows: repeat(3,50px);
+        height:150px;
         padding-left:0px;
         color:white;
         text-shadow: 1px 1px black;
