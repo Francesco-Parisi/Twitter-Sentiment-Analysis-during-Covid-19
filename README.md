@@ -1,11 +1,11 @@
 # ProgRetiUnisa
 
-Progetto di Reti Geografiche, incentrato sul Sentiment Analysis dei Tweets acquisiti tramite API
+Geographic Networks Project, focused on the Sentiment Analysis of Tweets acquired via API
 
 
 
 
-Per avviare la Web-App eseguire le seguenti operazioni da terminale dalla cartella ProgRetiUnisa:
+To start the Web-App, carry out the following operations from the terminal from the Twitter-Sentiment-Analysis-during-Covid-19 folder:
 
 1. cd prog-vue;
 2. npm install;
