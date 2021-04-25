@@ -1,4 +1,4 @@
-# ProgRetiUnisa
+# Twitter Sentimment Analysis in Italy during Covid-19
 
 Geographic Networks Project, focused on the Sentiment Analysis of Tweets acquired via API
 
