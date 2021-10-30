@@ -63,15 +63,15 @@ def cleanHashtags(string):
 
 
 ### Database Connection
-client= MongoClient("mongodb+srv://dbUser:dbUser@cluster0.lcwhz.mongodb.net/ProgReti?retryWrites=true&w=majority")
-db=client['ProgReti']
-collection=db['Week-3']
+client= MongoClient("CLIENT-MONGODB")
+db=client['PROJECT']
+collection=db['COLLECTION']
 
 #### Twitter Developer Credentials
-consumerKey = '4SUob4rkvJ3udNkdoWhgWB8w6'
-consumerSecret = 'gQHBuXo0Amw6fTlt1CwJp8xiIqnQxxgjyfTCQnBZz0nBUmqbBi'
-accessToken = '1331549356277817344-w4vmuKtf6W6qCcwvaNyqiqdvCjCILh'
-accessTokenSecret = 'kc3IqpTz3h0gzSny9MtdVuYVnQgoPXS2dZ0wZo48lYyRO'
+consumerKey = '##CONSUMER-KEY##'
+consumerSecret = '##CONSUMER-SECRET##'
+accessToken = '##ACCESS-TOKEN##'
+accessTokenSecret = '##ACCESS-TOKEN-SECRET##'
 
 auth = tweepy.OAuthHandler(consumerKey, consumerSecret)
 auth.set_access_token(accessToken, accessTokenSecret)
