@@ -12,6 +12,8 @@ npm run serve
 
 # Description
 
+![Description ](images/background.png)
+
 Given the current situation characterized by the pandemic phenomenon of Covid-19, we want to carry out Sentiment Analysis, through Twitter, to understand what the population thinks about it, focusing on how it reacted following the various government decisions (dpcm, etc.).
 Through Twitter, we have decided to capture tweets (referring to their retweets) with certain hashtags. To do this, it was necessary to create specific accounts on Twitter Developer, necessary to have the API available from the social network itself. Subsequently, after several meetings, it was decided to create a permanent copy of the tweets captured using a database.
 For the visualization of the results, which represent the general sentiment of the population, there were various possible developments such as:
