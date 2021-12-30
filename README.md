@@ -5,9 +5,9 @@ Geographic Networks Project, focused on the Sentiment Analysis of Tweets acquire
 To start the Web-App, carry out the following operations from the terminal from the Twitter-Sentiment-Analysis-during-Covid-19 folder:
 
 ```
-cd prog-vue;
-npm install;
-npm run serve;
+cd prog-vue
+npm install
+npm run serve
 ```
 
 # Description
@@ -67,3 +67,60 @@ The following conceptual map illustrates the various technologies and components
 
 ![Architecture Binding ](images/image.png)
 
+# Graphical Data Display
+
+La visualizzazione dei dati è stata ottenuta prendendo in considerazione le seguenti categorie. Per ognuna di esse, sono stati estrapolati i rispettivi hashtags:
+
+- Colori Regioni:
+
+![Graphical Data Display ](images/image1.png)
+
+- Negazionisti:
+
+![Graphical Data Display ](images/image2.png)
+
+- Sanità:
+
+![Graphical Data Display ](images/image3.png)
+
+- Governo:
+
+![Graphical Data Display ](images/image4.png)
+
+- Positivisti:
+
+![Graphical Data Display ](images/image5.png)
+
+- Scuola:
+
+![Graphical Data Display ](images/image6.png)
+
+- Periodo Natalizio:
+
+![Graphical Data Display ](images/image7.png)
+
+- Congiunti
+
+![Graphical Data Display ](images/image8.png)
+
+- Covid-19
+
+![Graphical Data Display ](images/image9.png)
+
+# Conclusions
+
+Despite the difficulties already described above and the existence of imponderable factors, it was still possible to collect and analyze the data, thus obtaining important answers to the problem. For a detailed view of the conclusions, the "General Sentiment" graph was used:
+It describes the general sentiment of all hashtags analyzed for the project. It is the graph that provides a precise answer to the question:
+
+![Graphical Data Display ](images/conclusions.png)
+
+Analyzing all the hashtags and considering different "sectors" of interest, the sentiment average turns out to be constantly neutral. In fact, it can be noted that the Sentiment tends to be slightly positive, while maintaining a strong prevalence of neutrality. 
+
+In detail, the results obtained are:
+
+- Negatives: 16.4%
+- Trending Negative: 15.5%
+- Positive Trending: 18.1%
+- Positive: 17.1%
+
+In conclusion, from the percentages obtained, it is possible to deduce a Positivity equal to 35.2% and a Negativity of 31.9%. We can therefore affirm that, during the period studied, the population reacted fairly favorably to the various government decisions.
